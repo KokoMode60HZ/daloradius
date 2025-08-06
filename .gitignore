@@ -1,4 +1,51 @@
-.idea/
-*.log
+# Database files
+*.sql
 *.db
-invoice_preview.html
+*.sqlite
+*.sqlite3
+
+# Log files
+*.log
+logs/
+log/
+
+# Session files
+sess_*
+session/
+
+# Cache files
+cache/
+tmp/
+temp/
+
+# Configuration with sensitive data
+config.php
+.env
+*.env
+
+# IDE files
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Backup files
+*.bak
+*.backup
+*~
+
+# Temporary files
+*.tmp
+*.temp
+
+# Compiled files
+*.min.js
+*.min.css
+
+# Dependencies (if any)
+vendor/
+node_modules/
