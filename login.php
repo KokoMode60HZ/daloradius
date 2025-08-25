@@ -19,7 +19,7 @@
 <div id="wrapper">
     <div id="innerwrapper">
         <div id="logo">
-            <img src="images/ljn_logo.png" alt="LJN Logo" />
+            <img src="images/logo.png" alt="LJN Logo" />
         </div>
         <div id="sidebar">
             <h2>Login Required</h2>
