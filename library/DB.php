@@ -156,4 +156,22 @@ class DB {
     public function escapeSimple($string) {
         return $this->mysqli->real_escape_string($string);
     }
+    
+    /**
+     * Prepare statement untuk query yang aman
+     */
+    public function prepare($sql) {
+        $stmt = $this->mysqli->prepare($sql);
+        if ($stmt === false) {
+            throw new Exception("Prepare failed: " . $this->mysqli->error);
+        }
+        return $stmt;
+    }
+    
+    /**
+     * Get last insert ID
+     */
+    public function insert_id() {
+        return $this->mysqli->insert_id;
+    }
 } 
