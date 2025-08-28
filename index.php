@@ -222,8 +222,17 @@
             </span>
         </a>
         <div id="payment-submenu" style="display:none;flex-direction:column;">
-            <a href="midtrans.php" style="display:flex;align-items:center;padding:10px 36px;color:#fff;text-decoration:none;background:#1565c0;">
-                <img src="images/circle_line.png" alt="" style="height:18px;width:18px;margin-right:10px;"> MIDTRANS
+            <a href="payment-index.php" style="display:flex;align-items:center;padding:10px 36px;color:#fff;text-decoration:none;background:#1565c0;">
+                <img src="images/circle_line.png" alt="" style="height:18px;width:18px;margin-right:10px;"> Payment Dashboard
+            </a>
+            <a href="checkout.php" style="display:flex;align-items:center;padding:10px 36px;color:#fff;text-decoration:none;background:#1565c0;">
+                <img src="images/circle_line.png" alt="" style="height:18px;width:18px;margin-right:10px;"> Checkout System
+            </a>
+            <a href="admin-bank-accounts.php" style="display:flex;align-items:center;padding:10px 36px;color:#fff;text-decoration:none;background:#1565c0;">
+                <img src="images/circle_line.png" alt="" style="height:18px;width:18px;margin-right:10px;"> Bank Accounts
+            </a>
+            <a href="admin/payment-dashboard.php" style="display:flex;align-items:center;padding:10px 36px;color:#fff;text-decoration:none;background:#1565c0;">
+                <img src="images/circle_line.png" alt="" style="height:18px;width:18px;margin-right:10px;"> Admin Panel
             </a>
         </div>
 

@@ -16,17 +16,19 @@ if (!isset($_SESSION['operator_user']) || $_SESSION['operator_user'] !== 'admini
 }
 
 // Handle form submissions
-if ($_POST['action'] == 'add_bank') {
+if (isset($_POST['action']) && $_POST['action'] == 'add_bank') {
     $bank_name = trim($_POST['bank_name']);
     $account_number = trim($_POST['account_number']);
     $account_holder = trim($_POST['account_holder']);
     
     if (!empty($bank_name) && !empty($account_number) && !empty($account_holder)) {
-        $sql = "INSERT INTO bank_accounts (bank_name, account_number, account_holder) VALUES (?, ?, ?)";
-        $stmt = $dbSocket->prepare($sql);
-        $stmt->bind_param("sss", $bank_name, $account_number, $account_holder);
+        $sql = "INSERT INTO bank_accounts (bank_name, account_number, account_holder, created_at) 
+                VALUES ('{$dbSocket->escapeSimple($bank_name)}', 
+                        '{$dbSocket->escapeSimple($account_number)}', 
+                        '{$dbSocket->escapeSimple($account_holder)}', 
+                        NOW())";
         
-        if ($stmt->execute()) {
+        if ($dbSocket->query($sql)) {
             $success_msg = "Rekening bank berhasil ditambahkan!";
         } else {
             $error_msg = "Gagal menambahkan rekening bank!";
@@ -36,18 +38,21 @@ if ($_POST['action'] == 'add_bank') {
     }
 }
 
-if ($_POST['action'] == 'edit_bank') {
+if (isset($_POST['action']) && $_POST['action'] == 'edit_bank') {
     $id = intval($_POST['bank_id']);
     $bank_name = trim($_POST['bank_name']);
-    $account_number = trim($_POST['account_number']);
+    $account_number = trim($_POST['bank_name']);
     $account_holder = trim($_POST['account_holder']);
     
     if ($id > 0 && !empty($bank_name) && !empty($account_number) && !empty($account_holder)) {
-        $sql = "UPDATE bank_accounts SET bank_name = ?, account_number = ?, account_holder = ? WHERE id = ?";
-        $stmt = $dbSocket->prepare($sql);
-        $stmt->bind_param("sssi", $bank_name, $account_number, $account_holder, $id);
+        $sql = "UPDATE bank_accounts SET 
+                bank_name = '{$dbSocket->escapeSimple($bank_name)}', 
+                account_number = '{$dbSocket->escapeSimple($account_number)}', 
+                account_holder = '{$dbSocket->escapeSimple($account_holder)}', 
+                updated_at = NOW() 
+                WHERE id = {$id}";
         
-        if ($stmt->execute()) {
+        if ($dbSocket->query($sql)) {
             $success_msg = "Rekening bank berhasil diupdate!";
         } else {
             $error_msg = "Gagal mengupdate rekening bank!";
@@ -57,15 +62,13 @@ if ($_POST['action'] == 'edit_bank') {
     }
 }
 
-if ($_POST['action'] == 'delete_bank') {
+if (isset($_POST['action']) && $_POST['action'] == 'delete_bank') {
     $id = intval($_POST['bank_id']);
     
     if ($id > 0) {
-        $sql = "DELETE FROM bank_accounts WHERE id = ?";
-        $stmt = $dbSocket->prepare($sql);
-        $stmt->bind_param("i", $id);
+        $sql = "DELETE FROM bank_accounts WHERE id = {$id}";
         
-        if ($stmt->execute()) {
+        if ($dbSocket->query($sql)) {
             $success_msg = "Rekening bank berhasil dihapus!";
         } else {
             $error_msg = "Gagal menghapus rekening bank!";
@@ -73,16 +76,14 @@ if ($_POST['action'] == 'delete_bank') {
     }
 }
 
-if ($_POST['action'] == 'toggle_status') {
+if (isset($_POST['action']) && $_POST['action'] == 'toggle_status') {
     $id = intval($_POST['bank_id']);
     $status = $_POST['status'] == '1' ? 0 : 1;
     
     if ($id > 0) {
-        $sql = "UPDATE bank_accounts SET is_active = ? WHERE id = ?";
-        $stmt = $dbSocket->prepare($sql);
-        $stmt->bind_param("ii", $status, $id);
+        $sql = "UPDATE bank_accounts SET is_active = {$status} WHERE id = {$id}";
         
-        if ($stmt->execute()) {
+        if ($dbSocket->query($sql)) {
             $success_msg = "Status rekening bank berhasil diubah!";
         } else {
             $error_msg = "Gagal mengubah status rekening bank!";
@@ -94,8 +95,11 @@ if ($_POST['action'] == 'toggle_status') {
 $bank_accounts = [];
 $sql = "SELECT * FROM bank_accounts ORDER BY created_at DESC";
 $result = $dbSocket->query($sql);
-while ($row = $result->fetch_assoc()) {
-    $bank_accounts[] = $row;
+if ($result && !$dbSocket->isError($result)) {
+    while ($dbSocket->numRows($result) > 0) {
+        $row = $dbSocket->fetchRow($result, DB_FETCHMODE_ASSOC);
+        $bank_accounts[] = $row;
+    }
 }
 ?>
 

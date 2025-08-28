@@ -7,15 +7,13 @@
 require_once 'library/DB.php';
 require_once 'config/payment_config.php';
 
-session_start();
-
-// Cek login
-if (!isset($_SESSION['daloradius_logged_in']) || $_SESSION['daloradius_logged_in'] !== true) {
+// Cek login menggunakan daloRADIUS session
+if (!isset($_SESSION['operator_user'])) {
     header('Location: dologin.php');
     exit;
 }
 
-$username = $_SESSION['daloradius_username'] ?? 'administrator';
+$username = $_SESSION['operator_user'] ?? 'administrator';
 $error = '';
 $success = '';
 

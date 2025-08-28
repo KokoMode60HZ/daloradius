@@ -4,8 +4,6 @@
  * Halaman utama untuk sistem payment gateway simulasi
  */
 
-// Include error handler first
-require_once 'error-handler.php';
 require_once 'library/DB.php';
 require_once 'config/payment_config.php';
 

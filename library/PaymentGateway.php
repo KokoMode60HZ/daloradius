@@ -268,4 +268,5 @@ class PaymentGateway {
         return $this->updateTransactionStatus($transactionId, $status, 'simulation');
     }
 }
+    
 ?> 
