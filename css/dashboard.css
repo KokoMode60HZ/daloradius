@@ -47,6 +47,10 @@
   background: var(--primary-orange);
   color: #fff;
 }
+.sidebar-nav nav a.active {
+  background: var(--primary-orange);
+  color: #fff;
+}
 
 #pengaturan-submenu {
   display: none;
