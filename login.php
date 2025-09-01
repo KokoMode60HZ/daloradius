@@ -11,7 +11,7 @@
 <script src="library/javascript/pages_common.js" type="text/javascript"></script>
 <title>LJN Login</title>
 <meta http-equiv="content-type" content="text/html; charset=utf-8" />
-<link rel="stylesheet" href="css/1.css" type="text/css" media="screen,projection" />
+<link rel="stylesheet" href="css/2.css" type="text/css" media="screen,projection" />
 </head>
 <body onLoad="document.login.operator_user.focus()">
 <?php include_once ("lang/main.php"); ?>
@@ -40,6 +40,7 @@
                 <label for="location">Location</label>
                 <select name="location" id="location" tabindex=3 class="generic">
                     <?php
+                    
                         if (isset($configValues['CONFIG_LOCATIONS']) && is_array($configValues['CONFIG_LOCATIONS']) && count($configValues['CONFIG_LOCATIONS']) > 0) {
                             foreach ($configValues['CONFIG_LOCATIONS'] as $locations=>$val)
                                 echo "<option value='$locations'>$locations</option>";
