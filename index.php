@@ -12,7 +12,7 @@
   <a href="status.php" style="display:inline-flex;align-items:center;gap:8px;background:#fb8c00;color:#fff;padding:10px 24px;border-radius:8px;text-decoration:none;font-size:1.2em;font-weight:bold;box-shadow:0 2px 8px rgba(0,0,0,0.07);transition:background 0.2s;">
     <i class="fas fa-chart-line"></i> Status Hari Ini
   </a>
-</div>
+  </div>
   <div class="dashboard-content" style="display:flex;gap:32px;">
     <div class="dashboard-main" style="flex:1;">
       <div class="dashboard-tabs" style="margin-bottom:18px;">

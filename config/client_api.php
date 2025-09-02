@@ -1,0 +1,3 @@
+<?php
+define('CLIENT_API_KEY', 'wikAeD8KEFfTWPfAHShmQczoGuclebbt');
+define('CLIENT_API_SECRET', 'hNXWNBZzuDLNL42KYJHd2SynsINJeTW2dWkNMK2eEI7hJ87g');
