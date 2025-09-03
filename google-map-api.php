@@ -63,9 +63,10 @@
 	</style>
 </head>
 <body>
-	<?php include 'includes/sidebar.php'; ?>
+	<?php include 'includes/header.php'; ?>
+	<?php include 'includes/sidebar-new.php'; ?>
 
-	<div class="dashboard-page" style="margin-left:240px;margin-top:56px;">
+	<div class="dashboard-page" style="margin-left:220px;margin-top:48px;">
 		<div id="gmaps-page">
 			<h2 class="title">Google Map API</h2>
 			<div class="subtitle">Konfigurasi API Key dan pratinjau peta</div>

@@ -33,9 +33,10 @@
     </style>
 </head>
 <body>
-    <?php include 'includes/sidebar.php'; ?>
+    	<?php include 'includes/header.php'; ?>
+	<?php include 'includes/sidebar-new.php'; ?>
 
-    <div class="dashboard-page" style="margin-left:240px;margin-top:56px;">
+	<div class="dashboard-page" style="margin-left:220px;margin-top:48px;">
         <div id="pgw-page">
             <h2 class="title">Payment Gateway Settings</h2>
             <div class="subtitle">Configure payment system and gateway settings</div>
@@ -60,10 +61,10 @@
                 </div>
             </div>
         </div>
-
+        
         <div id="footer" style="padding:16px 24px;">
             <?php include 'page-footer.php'; ?>
         </div>
     </div>
 </body>
-</html>
+</html> 

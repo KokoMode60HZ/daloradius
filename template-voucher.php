@@ -47,9 +47,10 @@
 	</style>
 </head>
 <body>
-	<?php include 'includes/sidebar.php'; ?>
+	<?php include 'includes/header.php'; ?>
+	<?php include 'includes/sidebar-new.php'; ?>
 
-	<div class="dashboard-page" style="margin-left:240px;margin-top:56px;">
+	<div class="dashboard-page" style="margin-left:220px;margin-top:48px;">
 		<div id="tpl-page">
 			<div class="head">
 				<h3 class="title"><span style="display:inline-flex;align-items:center;justify-content:center;width:26px;height:26px;border:1px solid #d0d7de;border-radius:4px;">≡</span> TEMPLATE VOUCHER</h3>

@@ -6,11 +6,7 @@
 
 <!-- Sidebar Navigation -->
 <div class="sidebar-nav" style="position:fixed;top:48px;left:0;width:220px;height:calc(100vh - 48px);background:#1558b0;color:#fff;display:flex;flex-direction:column;z-index:100;">
-    <!-- Top bar for logo, platform name, and future profile/icons -->
-    <div id="topbar" style="position:fixed;top:0;left:0;width:100vw;height:48px;background:rgba(21,88,176,0.98);border-bottom:2px solid rgba(255,255,255,0.18);display:flex;align-items:center;gap:12px;padding:0 24px;z-index:101;">
-        <img src="images/logo.png" alt="Logo" style="height:32px;">
-        <span style="font-size:1.1em;font-weight:bold;color:#fff;">LJN Management</span>
-    </div>
+
     <nav style="flex:1;overflow-y:auto;overflow-x:hidden;">
         <a href="javascript:void(0);" id="sessionuser-toggle" style="display:flex;align-items:center;padding:12px 24px;color:#fff;text-decoration:none;cursor:pointer;">
             <img src="images/session_user.png" alt="Session User" style="height:22px;width:22px;margin-right:12px;">
