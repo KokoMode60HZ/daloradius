@@ -111,10 +111,10 @@
 </head>
 <body>
 	<?php include 'includes/header.php'; ?>
-	<?php include 'includes/sidebar-new.php'; ?>
+	<?php include 'includes/sidebar.php'; ?>
 
 	<!-- konten utama, sejajar dengan halaman lain -->
-	<div class="dashboard-page" style="margin-left:220px;margin-top:48px;">
+	<div class="dashboard-page" style="margin-left:240px;margin-top:56px;">
 		<div id="router-nas">
 			<div class="page-header">
 				<h2 class="page-title">Router [NAS]</h2>

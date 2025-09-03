@@ -4,7 +4,7 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 <link rel="stylesheet" href="css/dashboard.css" type="text/css" />
 
-<!-- Sidebar Navigation -->
+<!-- Sidebar Navigation (header comes from includes/header.php) -->
 <div class="sidebar-nav" style="position:fixed;top:48px;left:0;width:220px;height:calc(100vh - 48px);background:#1558b0;color:#fff;display:flex;flex-direction:column;z-index:100;">
 
     <nav style="flex:1;overflow-y:auto;overflow-x:hidden;">

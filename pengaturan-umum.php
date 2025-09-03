@@ -178,6 +178,7 @@
     </style>
 </head>
 <body>
+    <?php include 'includes/header.php'; ?>
     <?php include 'includes/sidebar.php'; ?>
 
     <div class="dashboard-page" style="margin-left:240px;margin-top:56px;padding:24px;">

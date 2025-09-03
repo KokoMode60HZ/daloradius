@@ -1,3 +1,4 @@
+<?php include 'includes/header.php'; ?>
 <?php include 'includes/sidebar.php'; ?>
 
 <!-- Main Content (Status page, NO Status Hari Ini button) -->
