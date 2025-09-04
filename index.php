@@ -5,9 +5,10 @@
     include('include/config/logging.php');
 ?>
 
-<?php include 'includes/sidebar.php'; ?>
+<?php include 'includes/header.php'; ?>
+<?php include 'includes/sidebar-new.php'; ?>
 
-<div class="dashboard-page" style="margin-left:240px;margin-top:56px;padding:24px;">
+<div class="dashboard-page" style="margin-left:220px;margin-top:48px;padding:24px;">
   <div class="dashboard-header" style="display:flex;align-items:center;gap:12px;margin-bottom:24px;">
   <a href="status.php" style="display:inline-flex;align-items:center;gap:8px;background:#fb8c00;color:#fff;padding:10px 24px;border-radius:8px;text-decoration:none;font-size:1.2em;font-weight:bold;box-shadow:0 2px 8px rgba(0,0,0,0.07);transition:background 0.2s;">
     <i class="fas fa-chart-line"></i> Status Hari Ini
@@ -143,7 +144,7 @@
   </div>
 </div>
 
-<div id="footer" style="position:fixed;bottom:12px;left:240px;width:calc(100% - 240px);text-align:center;">
+<div id="footer" style="position:fixed;bottom:12px;left:220px;width:calc(100% - 220px);text-align:center;">
     <?php include 'page-footer.php'; ?>
 </div>
 <script>

@@ -1,7 +1,8 @@
-<?php include 'includes/sidebar.php'; ?>
+<?php include 'includes/header.php'; ?>
+<?php include 'includes/sidebar-new.php'; ?>
 
 <!-- Main Content (Status page, NO Status Hari Ini button) -->
-<div class="dashboard-page" style="margin-left:240px;margin-top:56px;padding:24px;">
+<div class="dashboard-page" style="margin-left:220px;margin-top:48px;padding:24px;">
     <div class="dashboard-content" style="display:flex;flex-direction:column;gap:32px;max-width:600px;">
         <!-- Status Cards Vertically -->
         <div class="dashboard-card" style="background:#43a047;border-radius:18px;padding:32px;text-align:left;box-shadow:0 2px 12px rgba(0,0,0,0.10);font-size:1.3em;display:flex;justify-content:space-between;align-items:center;">
@@ -58,7 +59,7 @@
     </div>
 </div>
 
-<div id="footer" style="position:fixed;bottom:12px;left:240px;width:calc(100% - 240px);text-align:center;">
+<div id="footer" style="position:fixed;bottom:12px;left:220px;width:calc(100% - 220px);text-align:center;">
     <?php include 'page-footer.php'; ?>
 </div>
 

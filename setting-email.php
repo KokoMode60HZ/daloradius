@@ -5,9 +5,10 @@
     include('include/config/logging.php');
 ?>
 
-<?php include 'includes/sidebar.php'; ?>
+<?php include 'includes/header.php'; ?>
+<?php include 'includes/sidebar-new.php'; ?>
 
-<div class="dashboard-page" style="margin-left:240px;margin-top:56px;padding:24px;">
+<div class="dashboard-page" style="margin-left:220px;margin-top:48px;padding:24px;">
   <div class="dashboard-header" style="display:flex;align-items:center;gap:12px;margin-bottom:24px;">
     <h1 style="margin:0;font-size:1.8em;font-weight:bold;color:#333;">Setting Notifikasi Email</h1>
   </div>
@@ -48,7 +49,7 @@
   </div>
 </div>
 
-<div id="footer" style="position:fixed;bottom:12px;left:240px;width:calc(100% - 240px);text-align:center;">
+<div id="footer" style="position:fixed;bottom:12px;left:220px;width:calc(100% - 220px);text-align:center;">
     <?php include 'page-footer.php'; ?>
 </div>
 
