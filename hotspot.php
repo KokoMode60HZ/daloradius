@@ -208,9 +208,10 @@
     </style>
 </head>
 <body>
-    <?php include 'includes/sidebar.php'; ?>
+    <?php include 'includes/header.php'; ?>
+    <?php include 'includes/sidebar-new.php'; ?>
 
-    <div class="dashboard-page" style="margin-left:240px;margin-top:56px;padding:24px;">
+    <div class="dashboard-page" style="margin-left:220px;margin-top:48px;padding:24px;">
         <div class="dashboard-header" style="display:flex;align-items:center;gap:12px;margin-bottom:24px;">
             <h2 style="margin:0;color:#333;">Session Management</h2>
         </div>

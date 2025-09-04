@@ -297,7 +297,7 @@
     </div>
 </div>
 
-<div class="dashboard-page" style="margin-left:240px;margin-top:56px;padding:24px;">
+<div class="dashboard-page" style="margin-left:220px;margin-top:48px;padding:24px;">
     <div style="background:#fff;border-radius:10px;padding:24px;box-shadow:0 2px 8px rgba(0,0,0,0.07);">
         <div style="font-size:1.3em;font-weight:bold;margin-bottom:16px;display:flex;align-items:center;gap:18px;">
             <a href="ppp.php" style="color:#009688;font-weight:bold;font-size:1.1em;text-decoration:none;display:flex;align-items:center;">
