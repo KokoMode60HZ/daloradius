@@ -1,16 +1,16 @@
 // Fungsi untuk toggle submenu dengan localStorage
 function toggleSubmenu(menuId, arrowId) {
     var submenu = document.getElementById(menuId);
-    var arrow = document.getElementById(arrowId).querySelector('img');
+    var arrow = document.getElementById(arrowId).querySelector('i');
     var isOpen = submenu.style.display === 'flex';
     
     if (isOpen) {
         submenu.style.display = 'none';
-        arrow.src = 'images/arrow_left.png';
+        arrow.className = 'fas fa-chevron-left';
         localStorage.setItem('sidebar_' + menuId, 'closed');
     } else {
         submenu.style.display = 'flex';
-        arrow.src = 'images/arrow_down.png';
+        arrow.className = 'fas fa-chevron-down';
         localStorage.setItem('sidebar_' + menuId, 'open');
     }
 }
@@ -30,7 +30,8 @@ document.addEventListener('DOMContentLoaded', function() {
         {id: 'payment-toggle', menu: 'payment-submenu', arrow: 'payment-arrow'},
         {id: 'tiket-toggle', menu: 'tiket-submenu', arrow: 'tiket-arrow'},
         {id: 'tools-toggle', menu: 'tools-submenu', arrow: 'tools-arrow'},
-        {id: 'log-toggle', menu: 'log-submenu', arrow: 'log-arrow'}
+        {id: 'log-toggle', menu: 'log-submenu', arrow: 'log-arrow'},
+        {id: 'mikrotik-toggle', menu: 'mikrotik-submenu', arrow: 'mikrotik-arrow'}
     ];
     
     toggles.forEach(function(toggle) {
@@ -50,7 +51,10 @@ document.addEventListener('DOMContentLoaded', function() {
             var arrow = document.getElementById(toggle.arrow);
             if (submenu && arrow) {
                 submenu.style.display = 'flex';
-                arrow.querySelector('img').src = 'images/arrow_down.png';
+                var arrowIcon = arrow.querySelector('i');
+                if (arrowIcon) {
+                    arrowIcon.className = 'fas fa-chevron-down';
+                }
             }
         }
     });

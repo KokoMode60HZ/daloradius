@@ -305,15 +305,66 @@
 		<a href="list-neighbor.php" style="display:flex;align-items:center;padding:12px 24px;color:#fff;text-decoration:none;">
 			<img src="images/list-neighbor.png" alt="List Neighbor" style="height:22px;width:22px;margin-right:12px;"> List Neighbor
 		</a>
+		
+		<a href="javascript:void(0);" id="mikrotik-toggle" style="display:flex;align-items:center;padding:12px 24px;color:#fff;text-decoration:none;cursor:pointer;" onclick="toggleMikrotikMenu();">
+			<i class="fas fa-network-wired" style="font-size:18px;margin-right:12px;color:#fff;"></i> MikroTik Integration
+			<span id="mikrotik-arrow" style="margin-left:auto;">
+				<i class="fas fa-chevron-left" id="mikrotik-arrow-icon" style="font-size:14px;color:#fff;"></i>
+			</span>
+		</a>
+		<div id="mikrotik-submenu" style="display:none;flex-direction:column;">
+			<a href="mikrotik-test.php" style="display:flex;align-items:center;padding:10px 36px;color:#fff;text-decoration:none;background:#1565c0;">
+				<i class="fas fa-plug" style="font-size:16px;margin-right:10px;"></i> Test Koneksi
+			</a>
+			<a href="mikrotik-dashboard.php" style="display:flex;align-items:center;padding:10px 36px;color:#fff;text-decoration:none;background:#1565c0;">
+				<i class="fas fa-tachometer-alt" style="font-size:16px;margin-right:10px;"></i> Router Dashboard
+			</a>
+			<a href="mikrotik-users.php" style="display:flex;align-items:center;padding:10px 36px;color:#fff;text-decoration:none;background:#1565c0;">
+				<i class="fas fa-users" style="font-size:16px;margin-right:10px;"></i> Active Users
+			</a>
+		</div>
 	</nav>
 	
-	<div style="padding:16px 16px 24px 16px;border-top:1px solid #1565c0;">
-		<span style="font-size:1em;">Welcome, <b><?php echo htmlspecialchars($operator); ?></b>.</span><br>
-		<span style="font-size:1em;">Location: <b>default.</b></span>
-		<a href="logout.php" title="Logout" style="float:right;color:#fff;font-size:1.2em;margin-top:-24px;">
-			<i class="fas fa-times"></i>
+	<div style="padding:16px;border-top:1px solid #1565c0;">
+		<div style="margin-bottom:12px;">
+			<span style="font-size:0.9em;color:#fff;">Welcome, <b><?php echo htmlspecialchars($operator); ?></b></span><br>
+			<span style="font-size:0.8em;color:#ccc;">Location: <b>default</b></span>
+		</div>
+		<a href="logout.php" style="display:flex;align-items:center;padding:8px 12px;background:#dc3545;color:#fff;text-decoration:none;border-radius:4px;font-size:0.9em;gap:8px;">
+			<i class="fas fa-sign-out-alt"></i>
+			Logout
 		</a>
 	</div>
 </div>
 
 <script src="includes/sidebar.js"></script>
+<script>
+// Fungsi khusus untuk toggle MikroTik menu
+function toggleMikrotikMenu() {
+    var submenu = document.getElementById('mikrotik-submenu');
+    var arrow = document.getElementById('mikrotik-arrow-icon');
+    
+    if (submenu.style.display === 'none' || submenu.style.display === '') {
+        submenu.style.display = 'flex';
+        arrow.className = 'fas fa-chevron-down';
+        localStorage.setItem('mikrotik_menu_open', 'true');
+    } else {
+        submenu.style.display = 'none';
+        arrow.className = 'fas fa-chevron-left';
+        localStorage.setItem('mikrotik_menu_open', 'false');
+    }
+}
+
+// Restore state MikroTik menu saat halaman load
+document.addEventListener('DOMContentLoaded', function() {
+    var isOpen = localStorage.getItem('mikrotik_menu_open');
+    if (isOpen === 'true') {
+        var submenu = document.getElementById('mikrotik-submenu');
+        var arrow = document.getElementById('mikrotik-arrow-icon');
+        if (submenu && arrow) {
+            submenu.style.display = 'flex';
+            arrow.className = 'fas fa-chevron-down';
+        }
+    }
+});
+</script>
