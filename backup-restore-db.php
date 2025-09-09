@@ -1,16 +1,16 @@
 <?php
-	include_once('library/config_read.php');
+    include_once('library/config_read.php');
 	include_once('library/checklogin.php');
 	$log = "visited page: backup restore db";
-	include('include/config/logging.php');
+    include('include/config/logging.php');
 ?>
 <!DOCTYPE html>
 <html>
 <head>
 	<title>Backup - Restore Database - daloRADIUS</title>
-	<link rel="stylesheet" href="css/styles.css" type="text/css" />
-	<link rel="stylesheet" href="css/form.css" type="text/css" />
-	<link rel="stylesheet" href="css/popup.css" type="text/css" />
+    <link rel="stylesheet" href="css/styles.css" type="text/css" />
+    <link rel="stylesheet" href="css/form.css" type="text/css" />
+    <link rel="stylesheet" href="css/popup.css" type="text/css" />
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 	<style>
 		.container { max-width: 1200px; margin: 0 auto; }
@@ -74,8 +74,8 @@
 							</div>
 							<div class="search">
 								<input type="text" id="searchInput" placeholder="Search..." oninput="renderTable(1)">
-							</div>
-						</div>
+            </div>
+                </div>
 
 						<table class="table">
 							<thead>
@@ -89,15 +89,15 @@
 						</table>
 						<div class="small" id="tableInfo"></div>
 						<div class="pagination" id="pagination"></div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
 
 	<div id="footer" style="position:fixed;bottom:12px;left:220px;width:calc(100% - 220px);text-align:center;">
 		<?php include 'page-footer.php'; ?>
-	</div>
+    </div>
 
 	<script>
 		const tables = [

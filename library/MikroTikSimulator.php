@@ -24,6 +24,14 @@ class MikroTikSimulator {
     public function connect() {
         // Simulasi delay koneksi
         usleep(500000); // 0.5 detik
+
+        // Validasi IP dan port sederhana
+        if (!filter_var($this->host, FILTER_VALIDATE_IP)) {
+            throw new Exception("Login gagal: IP Address tidak valid");
+        }
+        if (!is_numeric($this->port) || $this->port < 1 || $this->port > 65535) {
+            throw new Exception("Login gagal: Port API tidak valid");
+        }
         
         // Simulasi validasi kredensial
         if ($this->username == 'admin' && $this->password == '') {

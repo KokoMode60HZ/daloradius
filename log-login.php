@@ -1,21 +1,21 @@
 <?php
-	include_once('library/config_read.php');
+    include_once('library/config_read.php');
 	include_once('library/checklogin.php');
 	$log = "visited page: log login";
-	include('include/config/logging.php');
+    include('include/config/logging.php');
 ?>
 <!DOCTYPE html>
 <html>
 <head>
 	<title>Log Login - daloRADIUS</title>
-	<link rel="stylesheet" href="css/styles.css" type="text/css" />
-	<link rel="stylesheet" href="css/form.css" type="text/css" />
-	<link rel="stylesheet" href="css/popup.css" type="text/css" />
+    <link rel="stylesheet" href="css/styles.css" type="text/css" />
+    <link rel="stylesheet" href="css/form.css" type="text/css" />
+    <link rel="stylesheet" href="css/popup.css" type="text/css" />
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-	<script type="text/javascript" src="library/javascript/pages_common.js"></script>
-	<script type="text/javascript" src="library/javascript/ajax.js"></script>
-	<script type="text/javascript" src="library/javascript/dynamic.js"></script>
-	<script type="text/javascript" src="library/javascript/ajaxGeneric.js"></script>
+    <script type="text/javascript" src="library/javascript/pages_common.js"></script>
+    <script type="text/javascript" src="library/javascript/ajax.js"></script>
+    <script type="text/javascript" src="library/javascript/dynamic.js"></script>
+    <script type="text/javascript" src="library/javascript/ajaxGeneric.js"></script>
 	<style>
 		.log-container { max-width: 1400px; margin: 0 auto; }
 		.log-section { background:#fff; border-radius:8px; padding:24px; box-shadow:0 2px 8px rgba(0,0,0,.1); }
@@ -74,16 +74,16 @@
 					<div class="summary-card failed">
 						<h4>Login Gagal</h4>
 						<div class="number">89</div>
-					</div>
+            </div>
 					<div class="summary-card pending">
 						<h4>Pending</h4>
 						<div class="number">23</div>
-					</div>
+                </div>
 					<div class="summary-card">
 						<h4>Total</h4>
 						<div class="number">1,359</div>
-					</div>
-				</div>
+                        </div>
+                    </div>
 
 				<div class="filter-tabs">
 					<div class="filter-tab active" onclick="filterLogs('all')">Semua</div>
@@ -209,10 +209,10 @@
 					<button class="btn btn-secondary" onclick="changePage('next')">
 						Next <i class="fas fa-chevron-right"></i>
 					</button>
-				</div>
-			</div>
-		</div>
-	</div>
+                </div>
+            </div>
+        </div>
+    </div>
 
 	<div id="footer" style="position:fixed;bottom:12px;left:220px;width:calc(100% - 220px);text-align:center;">
 		<?php include 'page-footer.php'; ?>

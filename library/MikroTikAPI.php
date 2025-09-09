@@ -1,7 +1,7 @@
 <?php
 /**
  * MikroTik RouterOS API Client
- * Simple PHP class untuk koneksi ke MikroTik Router
+ * Simple PHP class untuk koneksi ke MikroTik Router fisik
  */
 
 class MikroTikAPI {
@@ -9,8 +9,8 @@ class MikroTikAPI {
     private $port;
     private $username;
     private $password;
-    private $socket;
     private $connected = false;
+    private $api;
 
     public function __construct($host, $port = 8728, $username = 'admin', $password = '') {
         $this->host = $host;
@@ -23,33 +23,23 @@ class MikroTikAPI {
      * Koneksi ke MikroTik Router
      */
     public function connect() {
-        try {
-            $this->socket = socket_create(AF_INET, SOCK_STREAM, SOL_TCP);
-            if (!$this->socket) {
-                throw new Exception("Tidak bisa membuat socket");
-            }
+        // Validasi IP dan port
+        if (!filter_var($this->host, FILTER_VALIDATE_IP)) {
+            throw new Exception("Login gagal: IP Address tidak valid");
+        }
+        if (!is_numeric($this->port) || $this->port < 1 || $this->port > 65535) {
+            throw new Exception("Login gagal: Port API tidak valid");
+        }
 
-            $result = socket_connect($this->socket, $this->host, $this->port);
-            if (!$result) {
-                throw new Exception("Tidak bisa koneksi ke router: " . socket_strerror(socket_last_error()));
-            }
-
-            // Login ke router
-            $this->write('/login');
-            $this->write('=name=' . $this->username);
-            $this->write('=password=' . $this->password);
-            $this->write('');
-
-            $response = $this->read();
-            if (strpos($response, '!done') !== false) {
-                $this->connected = true;
-                return true;
-            } else {
-                throw new Exception("Login gagal: " . $response);
-            }
-        } catch (Exception $e) {
-            $this->connected = false;
-            throw new Exception("Koneksi gagal: " . $e->getMessage());
+        // Koneksi ke router menggunakan API client (misal dengan RouterOS API PHP client)
+        // Contoh menggunakan RouterOS API library (harus diinstall dan disesuaikan)
+        $this->api = new RouterosAPI();
+        $this->api->debug = false;
+        if ($this->api->connect($this->host, $this->username, $this->password, $this->port)) {
+            $this->connected = true;
+            return true;
+        } else {
+            throw new Exception("Login gagal: tidak dapat terhubung ke router");
         }
     }
 
@@ -57,94 +47,65 @@ class MikroTikAPI {
      * Disconnect dari router
      */
     public function disconnect() {
-        if ($this->connected && $this->socket) {
-            socket_close($this->socket);
-            $this->connected = false;
+        if ($this->connected && $this->api) {
+            $this->api->disconnect();
         }
-    }
-
-    /**
-     * Kirim command ke router
-     */
-    public function sendCommand($command, $params = []) {
-        if (!$this->connected) {
-            throw new Exception("Tidak terhubung ke router");
-        }
-
-        $this->write($command);
-        foreach ($params as $key => $value) {
-            $this->write('=' . $key . '=' . $value);
-        }
-        $this->write('');
-
-        return $this->readResponse();
+        $this->connected = false;
     }
 
     /**
      * Ambil data user aktif
      */
     public function getActiveUsers() {
-        return $this->sendCommand('/ppp/active/print');
+        if (!$this->connected) {
+            throw new Exception("Tidak terhubung ke router");
+        }
+        return $this->api->comm("/ppp/active/print");
     }
 
     /**
      * Ambil data interface
      */
     public function getInterfaces() {
-        return $this->sendCommand('/interface/print');
+        if (!$this->connected) {
+            throw new Exception("Tidak terhubung ke router");
+        }
+        return $this->api->comm("/interface/print");
     }
 
     /**
      * Ambil data system resource
      */
     public function getSystemResource() {
-        return $this->sendCommand('/system/resource/print');
-    }
-
-    /**
-     * Write data ke socket
-     */
-    private function write($data) {
-        $length = strlen($data);
-        $packet = pack('N', $length) . $data;
-        socket_write($this->socket, $packet);
-    }
-
-    /**
-     * Read data dari socket
-     */
-    private function read() {
-        $length = socket_read($this->socket, 4);
-        if ($length === false) return '';
-        
-        $length = unpack('N', $length)[1];
-        if ($length == 0) return '';
-        
-        return socket_read($this->socket, $length);
-    }
-
-    /**
-     * Read response lengkap
-     */
-    private function readResponse() {
-        $response = [];
-        while (true) {
-            $line = $this->read();
-            if ($line === '') break;
-            $response[] = $line;
+        if (!$this->connected) {
+            throw new Exception("Tidak terhubung ke router");
         }
-        return $response;
+        return $this->api->comm("/system/resource/print");
     }
 
     /**
-     * Cek status koneksi
+     * Ambil data bandwidth monitoring
      */
-    public function isConnected() {
-        return $this->connected;
+    public function getBandwidthMonitoring() {
+        if (!$this->connected) {
+            throw new Exception("Tidak terhubung ke router");
+        }
+        // Contoh monitoring traffic interface, sesuaikan dengan API router
+        return $this->api->comm("/interface/monitor-traffic", ["interface" => "all", "once" => true]);
     }
 
     /**
-     * Test koneksi sederhana
+     * Ambil data PPP profiles
+     */
+    public function getPPPProfiles() {
+        if (!$this->connected) {
+            throw new Exception("Tidak terhubung ke router");
+        }
+        return $this->api->comm("/ppp/profile/print");
+    }
+
+    /**
+     * Test koneksi dengan router fisik
      */
     public function testConnection() {
         try {

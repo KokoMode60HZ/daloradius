@@ -157,7 +157,7 @@
               <?php else: ?>
                 <tr>
                   <td colspan="11" style="text-align:center;">No active users found</td>
-                </tr>
+              </tr>
               <?php endif; ?>
             </tbody>
           </table>
