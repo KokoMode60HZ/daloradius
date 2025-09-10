@@ -167,10 +167,10 @@
 			</span>
 		</a>
 		<div id="tagihan-submenu" style="display:none;flex-direction:column;">
-			<a href="tagihan-semua.php" style="display:flex;align-items:center;padding:10px 36px;color:#fff;text-decoration:none;background:#1565c0;">
+			<a href="javascript:void(0);" onclick="showSemuaTagihanModal()" style="display:flex;align-items:center;padding:10px 36px;color:#fff;text-decoration:none;background:#1565c0;">
 				<img src="images/circle_line.png" alt="" style="height:18px;width:18px;margin-right:10px;"> Semua Tagihan
 			</a>
-			<a href="tagihan-periode.php" style="display:flex;align-items:center;padding:10px 36px;color:#fff;text-decoration:none;background:#1565c0;">
+			<a href="javascript:void(0);" onclick="showTagihanPeriodeModal()" style="display:flex;align-items:center;padding:10px 36px;color:#fff;text-decoration:none;background:#1565c0;">
 				<img src="images/circle_line.png" alt="" style="height:18px;width:18px;margin-right:10px;"> Tagihan Periode
 			</a>
 		</div>
@@ -365,6 +365,169 @@ document.addEventListener('DOMContentLoaded', function() {
             submenu.style.display = 'flex';
             arrow.className = 'fas fa-chevron-down';
         }
+    }
+});
+
+// Semua Tagihan Modal Functions
+function showSemuaTagihanModal() {
+    // Always show modal when clicking "Semua Tagihan"
+    document.getElementById('semuaTagihanModal').style.display = 'block';
+}
+
+function hideSemuaTagihanModal() {
+    document.getElementById('semuaTagihanModal').style.display = 'none';
+}
+
+function submitSemuaTagihanForm() {
+    var tipeService = document.getElementById('sidebarTipeService').value;
+    var ownerData = document.getElementById('sidebarOwnerData').value;
+    
+    // Build URL with parameters
+    var url = 'tagihan-semua.php';
+    var params = [];
+    
+    if (tipeService) {
+        params.push('tipe_service=' + encodeURIComponent(tipeService));
+    }
+    if (ownerData) {
+        params.push('owner_data=' + encodeURIComponent(ownerData));
+    }
+    
+    if (params.length > 0) {
+        url += '?' + params.join('&');
+    }
+    
+    // Navigate to the page
+    window.location.href = url;
+}
+
+// Tagihan Periode Modal Functions
+function showTagihanPeriodeModal() {
+    // Always show modal when clicking "Tagihan Periode"
+    document.getElementById('tagihanPeriodeModal').style.display = 'block';
+}
+
+function hideTagihanPeriodeModal() {
+    document.getElementById('tagihanPeriodeModal').style.display = 'none';
+}
+
+function submitTagihanPeriodeForm() {
+    var startDate = document.getElementById('periodeStartDate').value;
+    var endDate = document.getElementById('periodeEndDate').value;
+    var tipeService = document.getElementById('periodeTipeService').value;
+    var ownerData = document.getElementById('periodeOwnerData').value;
+    
+    // Build URL with parameters
+    var url = 'tagihan-periode.php';
+    var params = [];
+    
+    if (startDate) {
+        params.push('start_date=' + encodeURIComponent(startDate));
+    }
+    if (endDate) {
+        params.push('end_date=' + encodeURIComponent(endDate));
+    }
+    if (tipeService) {
+        params.push('tipe_service=' + encodeURIComponent(tipeService));
+    }
+    if (ownerData) {
+        params.push('owner_data=' + encodeURIComponent(ownerData));
+    }
+    
+    if (params.length > 0) {
+        url += '?' + params.join('&');
+    }
+    
+    // Navigate to the page
+    window.location.href = url;
+}
+</script>
+
+<!-- Semua Tagihan Modal -->
+<div id="semuaTagihanModal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 1000;">
+    <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); background: white; padding: 30px; border-radius: 8px; min-width: 400px;">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+            <h3 style="margin: 0; color: #333;">Semua Tagihan</h3>
+            <button onclick="hideSemuaTagihanModal()" style="background: none; border: none; font-size: 20px; cursor: pointer; color: #999;">&times;</button>
+        </div>
+        
+        <div style="margin-bottom: 20px;">
+            <label style="display: block; margin-bottom: 5px; font-weight: bold;">Tipe Service</label>
+            <select id="sidebarTipeService" style="width: 100%; padding: 8px; border: 1px solid #ddd; border-radius: 4px;">
+                <option value="">- Semua Transaksi -</option>
+                <option value="hotspot">Hotspot</option>
+                <option value="ppp">PPP</option>
+            </select>
+        </div>
+        
+        <div style="margin-bottom: 20px;">
+            <label style="display: block; margin-bottom: 5px; font-weight: bold;">Owner Data</label>
+            <select id="sidebarOwnerData" style="width: 100%; padding: 8px; border: 1px solid #ddd; border-radius: 4px;">
+                <option value="">- Semua Owner -</option>
+                <option value="root">root</option>
+                <option value="user">user</option>
+            </select>
+        </div>
+        
+        <button onclick="submitSemuaTagihanForm()" style="background: #007bff; color: white; border: none; padding: 10px 20px; border-radius: 4px; cursor: pointer; width: 100%;">
+            Lihat Laporan
+        </button>
+    </div>
+</div>
+
+<!-- Tagihan Periode Modal -->
+<div id="tagihanPeriodeModal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 1000;">
+    <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); background: white; padding: 30px; border-radius: 8px; min-width: 400px;">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+            <h3 style="margin: 0; color: #333;">Tagihan Periode</h3>
+            <button onclick="hideTagihanPeriodeModal()" style="background: none; border: none; font-size: 20px; cursor: pointer; color: #999;">&times;</button>
+        </div>
+        
+        <div style="margin-bottom: 20px;">
+            <label style="display: block; margin-bottom: 5px; font-weight: bold;">Dari Tanggal</label>
+            <input type="date" id="periodeStartDate" style="width: 100%; padding: 8px; border: 1px solid #ddd; border-radius: 4px;">
+        </div>
+        
+        <div style="margin-bottom: 20px;">
+            <label style="display: block; margin-bottom: 5px; font-weight: bold;">Sampai Tanggal</label>
+            <input type="date" id="periodeEndDate" style="width: 100%; padding: 8px; border: 1px solid #ddd; border-radius: 4px;">
+        </div>
+        
+        <div style="margin-bottom: 20px;">
+            <label style="display: block; margin-bottom: 5px; font-weight: bold;">Tipe Service</label>
+            <select id="periodeTipeService" style="width: 100%; padding: 8px; border: 1px solid #ddd; border-radius: 4px;">
+                <option value="">- Semua Transaksi -</option>
+                <option value="hotspot">Hotspot</option>
+                <option value="ppp">PPP</option>
+            </select>
+        </div>
+        
+        <div style="margin-bottom: 20px;">
+            <label style="display: block; margin-bottom: 5px; font-weight: bold;">Owner Data</label>
+            <select id="periodeOwnerData" style="width: 100%; padding: 8px; border: 1px solid #ddd; border-radius: 4px;">
+                <option value="">- Semua Owner -</option>
+                <option value="root">root</option>
+                <option value="user">user</option>
+            </select>
+        </div>
+        
+        <button onclick="submitTagihanPeriodeForm()" style="background: #007bff; color: white; border: none; padding: 10px 20px; border-radius: 4px; cursor: pointer; width: 100%;">
+            Lihat Laporan
+        </button>
+    </div>
+</div>
+
+<script>
+// Close modal when clicking outside
+document.addEventListener('click', function(event) {
+    var semuaModal = document.getElementById('semuaTagihanModal');
+    var periodeModal = document.getElementById('tagihanPeriodeModal');
+    
+    if (event.target == semuaModal) {
+        semuaModal.style.display = 'none';
+    }
+    if (event.target == periodeModal) {
+        periodeModal.style.display = 'none';
     }
 });
 </script>
