@@ -41,11 +41,20 @@ function session_verify() {
 
 if (session_verify() == "yes") {
 	if (!isset($_SESSION['daloradius_logged_in']) || $_SESSION['daloradius_logged_in'] != true) {
+		header("Cache-Control: no-store, no-cache, must-revalidate, max-age=0");
+		header("Cache-Control: post-check=0, pre-check=0", false);
+		header("Pragma: no-cache");
 		header('Location: login.php');
 		exit;
 	}
 } else {
-	// maybe the session is verified but the user is not logged in
+	// Clear all session data and cookies
+	session_unset();
+	session_destroy();
+	setcookie(session_name(), '', time() - 3600, '/');
+	header("Cache-Control: no-store, no-cache, must-revalidate, max-age=0");
+	header("Cache-Control: post-check=0, pre-check=0", false);
+	header("Pragma: no-cache");
 	header('Location: login.php');
 	exit;
 }

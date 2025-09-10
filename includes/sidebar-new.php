@@ -325,16 +325,7 @@
 		</div>
 	</nav>
 	
-	<div style="padding:16px;border-top:1px solid #1565c0;">
-		<div style="margin-bottom:12px;">
-			<span style="font-size:0.9em;color:#fff;">Welcome, <b><?php echo htmlspecialchars($operator); ?></b></span><br>
-			<span style="font-size:0.8em;color:#ccc;">Location: <b>default</b></span>
-		</div>
-		<a href="logout.php" style="display:flex;align-items:center;padding:8px 12px;background:#dc3545;color:#fff;text-decoration:none;border-radius:4px;font-size:0.9em;gap:8px;">
-			<i class="fas fa-sign-out-alt"></i>
-			Logout
-		</a>
-	</div>
+
 </div>
 
 <script src="includes/sidebar.js"></script>
