@@ -8,6 +8,7 @@
 require_once 'error-handler.php';
 require_once 'library/DB.php';
 require_once 'config/payment_config.php';
+include_once('library/checklogin.php');
 
 // Cek login menggunakan daloRADIUS session
 if (!isset($_SESSION['operator_user'])) {
@@ -24,7 +25,7 @@ $totalTransactions = 0;
 
 try {
     $db = DB::connect("mysql://root:@localhost:3306/radius");
-    if ($db && !$db->isError()) {
+    if ($db && !$db->isError($db)) {
         // Ambil saldo
         $balanceQuery = "SELECT balance FROM " . TABLE_USER_BALANCE . " WHERE username = '{$db->escapeSimple($username)}'";
         $balanceResult = $db->query($balanceQuery);

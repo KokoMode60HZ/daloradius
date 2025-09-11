@@ -1,7 +1,7 @@
 # TODO List for MikroTik Integration Testing
 
 ## 1. Dashboard Testing
-- [ ] Verify router system info display (model, uptime, memory)
+- [ u] Verify router system info display (model, uptime, memory)
 - [ ] Check active users list accuracy and completeness
 - [ ] Validate network interfaces status and details
 - [ ] Test bandwidth monitoring display and accuracy

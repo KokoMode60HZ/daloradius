@@ -9,6 +9,8 @@ include_once("library/opendb.php");
 include_once("include/management/functions.php");
 include_once("include/management/pages_common.php");
 
+ini_set('memory_limit', '256M');
+
 // Check if user is admin
 if (!isset($_SESSION['operator_user']) || $_SESSION['operator_user'] !== 'administrator') {
     header("Location: index.php");
@@ -96,8 +98,7 @@ $bank_accounts = [];
 $sql = "SELECT * FROM bank_accounts ORDER BY created_at DESC";
 $result = $dbSocket->query($sql);
 if ($result && !$dbSocket->isError($result)) {
-    while ($dbSocket->numRows($result) > 0) {
-        $row = $dbSocket->fetchRow($result, DB_FETCHMODE_ASSOC);
+    while ($row = $dbSocket->fetchRow($result, DB_FETCHMODE_ASSOC)) {
         $bank_accounts[] = $row;
     }
 }
@@ -411,4 +412,4 @@ if ($result && !$dbSocket->isError($result)) {
         <?php endif; ?>
     </script>
 </body>
-</html> 
+</html>

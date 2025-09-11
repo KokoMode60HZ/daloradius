@@ -1,4 +1,5 @@
 <?php
+include_once('library/checklogin.php');
 /**
  * Halaman Checkout Simulasi Payment Gateway
  * Sistem buatan sendiri untuk testing tanpa pihak ketiga
@@ -71,7 +72,7 @@ if ($_POST) {
 $currentBalance = 0;
 try {
     $db = DB::connect("mysql://root:@localhost:3306/radius");
-    if (!$db->isError()) {
+    if (!$db->isError($db)) {
         $balanceQuery = "SELECT balance FROM " . TABLE_USER_BALANCE . " WHERE username = '{$db->escapeSimple($username)}'";
         $balanceResult = $db->query($balanceQuery);
         if (!$db->isError($balanceResult) && $db->numRows($balanceResult) > 0) {

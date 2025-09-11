@@ -8,6 +8,8 @@ require_once '../library/DB.php';
 require_once '../config/payment_config.php';
 
 session_start();
+include_once(__DIR__ . '/../includes/header.php');
+include_once(__DIR__ . '/../includes/sidebar-new.php');
 
 // Cek login admin
 if (!isset($_SESSION['daloradius_logged_in']) || $_SESSION['daloradius_logged_in'] !== true) {
@@ -31,7 +33,7 @@ if ($_POST && isset($_POST['update_status'])) {
         
         // Update status transaksi
         $db = DB::connect("mysql://root:@localhost:3306/radius");
-        if ($db->isError()) {
+        if ($db->isError($db)) {
             throw new Exception("Database connection failed: " . $db->getMessage());
         }
         
@@ -95,23 +97,19 @@ $allTransactions = [];
 
 try {
     $db = DB::connect("mysql://root:@localhost:3306/radius");
-    if (!$db->isError()) {
+    if (!$db->isError($db)) {
         // Statistik
         $totalQuery = "SELECT COUNT(*) as total FROM " . TABLE_PAYMENT_TRANSACTIONS;
-        $totalResult = $db->query($totalQuery);
-        $stats['total_transactions'] = $db->getOne($totalResult);
+        $stats['total_transactions'] = $db->getOne($totalQuery);
         
         $incomeQuery = "SELECT SUM(amount) as total FROM " . TABLE_PAYMENT_TRANSACTIONS . " WHERE status = 'success'";
-        $incomeResult = $db->query($incomeQuery);
-        $stats['total_income'] = $db->getOne($incomeResult) ?: 0;
+        $stats['total_income'] = $db->getOne($incomeQuery) ?: 0;
         
         $pendingQuery = "SELECT COUNT(*) as total FROM " . TABLE_PAYMENT_TRANSACTIONS . " WHERE status = 'pending'";
-        $pendingResult = $db->query($pendingQuery);
-        $stats['pending_transactions'] = $db->getOne($pendingResult);
+        $stats['pending_transactions'] = $db->getOne($pendingQuery);
         
         $successQuery = "SELECT COUNT(*) as total FROM " . TABLE_PAYMENT_TRANSACTIONS . " WHERE status = 'success'";
-        $successResult = $db->query($successQuery);
-        $stats['success_transactions'] = $db->getOne($successResult);
+        $stats['success_transactions'] = $db->getOne($successQuery);
         
         // Transaksi terbaru
         $recentQuery = "SELECT * FROM " . TABLE_PAYMENT_TRANSACTIONS . " 
@@ -150,6 +148,7 @@ try {
             max-width: 1400px;
             margin: 20px auto;
             padding: 20px;
+            margin-left: 240px;
         }
         .stats-grid {
             display: grid;
@@ -276,7 +275,7 @@ try {
     </style>
 </head>
 <body>
-    <div class="container">
+    <div class="container" style="margin-left:240px;">
         <h1>🔧 Admin Dashboard - Payment Gateway Simulasi</h1>
         <p>Selamat datang, <strong><?= htmlspecialchars($username) ?></strong>! Kelola semua transaksi pembayaran dari sini.</p>
         
@@ -498,4 +497,4 @@ try {
         document.getElementById('statusFilter').addEventListener('change', filterTransactions);
     </script>
 </body>
-</html> 
+</html>
