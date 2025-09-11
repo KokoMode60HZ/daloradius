@@ -183,13 +183,13 @@
 			</span>
 		</a>
 		<div id="keuangan-submenu" style="display:none;flex-direction:column;">
-			<a href="topup-reseller.php" style="display:flex;align-items:center;padding:10px 36px;color:#fff;text-decoration:none;background:#1565c0;">
+			<a href="javascript:void(0);" onclick="showTopupResellerModal()" style="display:flex;align-items:center;padding:10px 36px;color:#fff;text-decoration:none;background:#1565c0;">
 				<img src="images/circle_line.png" alt="" style="height:18px;width:18px;margin-right:10px;"> Topup Reseller
 			</a>
-			<a href="income-harian.php" style="display:flex;align-items:center;padding:10px 36px;color:#fff;text-decoration:none;background:#1565c0;">
+			<a href="javascript:void(0);" onclick="showIncomeHarianModal()" style="display:flex;align-items:center;padding:10px 36px;color:#fff;text-decoration:none;background:#1565c0;">
 				<img src="images/circle_line.png" alt="" style="height:18px;width:18px;margin-right:10px;"> Income Harian
 			</a>
-			<a href="income-periode.php" style="display:flex;align-items:center;padding:10px 36px;color:#fff;text-decoration:none;background:#1565c0;">
+			<a href="javascript:void(0);" onclick="showIncomePeriodeModal()" style="display:flex;align-items:center;padding:10px 36px;color:#fff;text-decoration:none;background:#1565c0;">
 				<img src="images/circle_line.png" alt="" style="height:18px;width:18px;margin-right:10px;"> Income Periode
 			</a>
 			<a href="pengeluaran.php" style="display:flex;align-items:center;padding:10px 36px;color:#fff;text-decoration:none;background:#1565c0;">
@@ -432,6 +432,133 @@ function submitTagihanPeriodeForm() {
     // Navigate to the page
     window.location.href = url;
 }
+
+// Topup Reseller Modal Functions
+function showTopupResellerModal() {
+    // Always show modal when clicking "Topup Reseller"
+    document.getElementById('topupResellerModal').style.display = 'block';
+}
+
+function hideTopupResellerModal() {
+    document.getElementById('topupResellerModal').style.display = 'none';
+}
+
+function submitTopupResellerForm() {
+    var startDate = document.getElementById('topupStartDate').value;
+    var endDate = document.getElementById('topupEndDate').value;
+    var reseller = document.getElementById('topupReseller').value;
+    
+    // Build URL with parameters
+    var url = 'topup-reseller.php';
+    var params = [];
+    
+    if (startDate) {
+        params.push('start_date=' + encodeURIComponent(startDate));
+    }
+    if (endDate) {
+        params.push('end_date=' + encodeURIComponent(endDate));
+    }
+    if (reseller) {
+        params.push('reseller=' + encodeURIComponent(reseller));
+    }
+    
+    if (params.length > 0) {
+        url += '?' + params.join('&');
+    }
+    
+    // Navigate to the page
+    window.location.href = url;
+}
+
+// Income Harian Modal Functions
+function showIncomeHarianModal() {
+    // Always show modal when clicking "Income Harian"
+    document.getElementById('incomeHarianModal').style.display = 'block';
+}
+
+function hideIncomeHarianModal() {
+    document.getElementById('incomeHarianModal').style.display = 'none';
+}
+
+function submitIncomeHarianForm() {
+    var tipeUser = document.querySelector('input[name="tipeUser"]:checked') ? document.querySelector('input[name="tipeUser"]:checked').value : '';
+    var tipeService = document.getElementById('incomeTipeService').value;
+    var ownerData = document.getElementById('incomeOwnerData').value;
+    var metodePembayaran = document.getElementById('incomeMetodePembayaran').value;
+    
+    // Build URL with parameters
+    var url = 'income-harian.php';
+    var params = [];
+    
+    if (tipeUser) {
+        params.push('tipe_user=' + encodeURIComponent(tipeUser));
+    }
+    if (tipeService) {
+        params.push('tipe_service=' + encodeURIComponent(tipeService));
+    }
+    if (ownerData) {
+        params.push('owner_data=' + encodeURIComponent(ownerData));
+    }
+    if (metodePembayaran) {
+        params.push('metode_pembayaran=' + encodeURIComponent(metodePembayaran));
+    }
+    
+    if (params.length > 0) {
+        url += '?' + params.join('&');
+    }
+    
+    // Navigate to the page
+    window.location.href = url;
+}
+
+// Income Periode Modal Functions
+function showIncomePeriodeModal() {
+    // Always show modal when clicking "Income Periode"
+    document.getElementById('incomePeriodeModal').style.display = 'block';
+}
+
+function hideIncomePeriodeModal() {
+    document.getElementById('incomePeriodeModal').style.display = 'none';
+}
+
+function submitIncomePeriodeForm() {
+    var startDate = document.getElementById('incomePeriodeStartDate').value;
+    var endDate = document.getElementById('incomePeriodeEndDate').value;
+    var tipeUser = document.querySelector('input[name="incomePeriodeTipeUser"]:checked') ? document.querySelector('input[name="incomePeriodeTipeUser"]:checked').value : '';
+    var tipeService = document.getElementById('incomePeriodeTipeService').value;
+    var ownerData = document.getElementById('incomePeriodeOwnerData').value;
+    var metodePembayaran = document.getElementById('incomePeriodeMetodePembayaran').value;
+    
+    // Build URL with parameters
+    var url = 'income-periode.php';
+    var params = [];
+    
+    if (startDate) {
+        params.push('start_date=' + encodeURIComponent(startDate));
+    }
+    if (endDate) {
+        params.push('end_date=' + encodeURIComponent(endDate));
+    }
+    if (tipeUser) {
+        params.push('tipe_user=' + encodeURIComponent(tipeUser));
+    }
+    if (tipeService) {
+        params.push('tipe_service=' + encodeURIComponent(tipeService));
+    }
+    if (ownerData) {
+        params.push('owner_data=' + encodeURIComponent(ownerData));
+    }
+    if (metodePembayaran) {
+        params.push('metode_pembayaran=' + encodeURIComponent(metodePembayaran));
+    }
+    
+    if (params.length > 0) {
+        url += '?' + params.join('&');
+    }
+    
+    // Navigate to the page
+    window.location.href = url;
+}
 </script>
 
 <!-- Semua Tagihan Modal -->
@@ -508,17 +635,193 @@ function submitTagihanPeriodeForm() {
     </div>
 </div>
 
+<!-- Topup Reseller Modal -->
+<div id="topupResellerModal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 1000;">
+    <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); background: white; padding: 30px; border-radius: 8px; min-width: 400px;">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+            <h3 style="margin: 0; color: #333;">Laporan Topup Reseller</h3>
+            <button onclick="hideTopupResellerModal()" style="background: none; border: none; font-size: 20px; cursor: pointer; color: #999;">&times;</button>
+        </div>
+        
+        <div style="margin-bottom: 20px;">
+            <label style="display: block; margin-bottom: 5px; font-weight: bold;">Dari Tanggal</label>
+            <input type="date" id="topupStartDate" style="width: 100%; padding: 8px; border: 1px solid #ddd; border-radius: 4px;">
+        </div>
+        
+        <div style="margin-bottom: 20px;">
+            <label style="display: block; margin-bottom: 5px; font-weight: bold;">Sampai Tanggal</label>
+            <input type="date" id="topupEndDate" style="width: 100%; padding: 8px; border: 1px solid #ddd; border-radius: 4px;">
+        </div>
+        
+        <div style="margin-bottom: 20px;">
+            <label style="display: block; margin-bottom: 5px; font-weight: bold;">Reseller</label>
+            <select id="topupReseller" style="width: 100%; padding: 8px; border: 1px solid #ddd; border-radius: 4px;">
+                <option value="">- Pilih Reseller -</option>
+                <option value="reseller1">Reseller 1</option>
+                <option value="reseller2">Reseller 2</option>
+                <option value="reseller3">Reseller 3</option>
+                <option value="all">Semua Reseller</option>
+            </select>
+        </div>
+        
+        <button onclick="submitTopupResellerForm()" style="background: #007bff; color: white; border: none; padding: 10px 20px; border-radius: 4px; cursor: pointer; width: 100%;">
+            Lihat Laporan
+        </button>
+    </div>
+</div>
+
+<!-- Income Harian Modal -->
+<div id="incomeHarianModal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 1000;">
+    <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); background: white; padding: 30px; border-radius: 8px; min-width: 500px;">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+            <h3 style="margin: 0; color: #333;">Pendapatan Harian</h3>
+            <button onclick="hideIncomeHarianModal()" style="background: none; border: none; font-size: 20px; cursor: pointer; color: #999;">&times;</button>
+        </div>
+        
+        <div style="margin-bottom: 20px;">
+            <label style="display: block; margin-bottom: 10px; font-weight: bold;">Tipe User</label>
+            <div style="margin-bottom: 8px;">
+                <input type="radio" id="semuaTipeHarian" name="tipeUser" value="SEMUA TIPE" checked style="margin-right: 8px;">
+                <label for="semuaTipeHarian" style="font-weight: normal;">SEMUA TIPE</label>
+            </div>
+            <div style="margin-bottom: 8px;">
+                <input type="radio" id="customerHarian" name="tipeUser" value="CUSTOMER" style="margin-right: 8px;">
+                <label for="customerHarian" style="font-weight: normal;">CUSTOMER</label>
+            </div>
+            <div style="margin-bottom: 8px;">
+                <input type="radio" id="voucherHarian" name="tipeUser" value="VOUCHER" style="margin-right: 8px;">
+                <label for="voucherHarian" style="font-weight: normal;">VOUCHER</label>
+            </div>
+        </div>
+        
+        <div style="margin-bottom: 20px;">
+            <label style="display: block; margin-bottom: 5px; font-weight: bold;">Tipe Service</label>
+            <select id="incomeTipeService" style="width: 100%; padding: 8px; border: 1px solid #ddd; border-radius: 4px;">
+                <option value="">- Semua Transaksi -</option>
+                <option value="hotspot">Hotspot</option>
+                <option value="ppp">PPP</option>
+            </select>
+        </div>
+        
+        <div style="margin-bottom: 20px;">
+            <label style="display: block; margin-bottom: 5px; font-weight: bold;">Owner Data</label>
+            <select id="incomeOwnerData" style="width: 100%; padding: 8px; border: 1px solid #ddd; border-radius: 4px;">
+                <option value="">- Semua Owner -</option>
+                <option value="root">root</option>
+                <option value="user">user</option>
+            </select>
+        </div>
+        
+        <div style="margin-bottom: 20px;">
+            <label style="display: block; margin-bottom: 5px; font-weight: bold;">Metode Pembayaran</label>
+            <select id="incomeMetodePembayaran" style="width: 100%; padding: 8px; border: 1px solid #ddd; border-radius: 4px;">
+                <option value="">- Semua Metode Pembayaran -</option>
+                <option value="cash">Cash</option>
+                <option value="transfer">Transfer</option>
+                <option value="credit_card">Credit Card</option>
+                <option value="e_wallet">E-Wallet</option>
+            </select>
+        </div>
+        
+        <button onclick="submitIncomeHarianForm()" style="background: #007bff; color: white; border: none; padding: 10px 20px; border-radius: 4px; cursor: pointer; width: 100%;">
+            Lihat Laporan
+        </button>
+    </div>
+</div>
+
+<!-- Income Periode Modal -->
+<div id="incomePeriodeModal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 1000;">
+    <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); background: white; padding: 30px; border-radius: 8px; min-width: 500px;">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+            <h3 style="margin: 0; color: #333;">Pendapatan Periode</h3>
+            <button onclick="hideIncomePeriodeModal()" style="background: none; border: none; font-size: 20px; cursor: pointer; color: #999;">&times;</button>
+        </div>
+        
+        <div style="margin-bottom: 20px;">
+            <label style="display: block; margin-bottom: 5px; font-weight: bold;">Dari Tanggal</label>
+            <input type="date" id="incomePeriodeStartDate" style="width: 100%; padding: 8px; border: 1px solid #ddd; border-radius: 4px;">
+        </div>
+        
+        <div style="margin-bottom: 20px;">
+            <label style="display: block; margin-bottom: 5px; font-weight: bold;">Sampai Tanggal</label>
+            <input type="date" id="incomePeriodeEndDate" style="width: 100%; padding: 8px; border: 1px solid #ddd; border-radius: 4px;">
+            <div style="font-size: 12px; color: #666; margin-top: 5px;">RENTANG WAKTU INVOICE TERBAYAR</div>
+        </div>
+        
+        <div style="margin-bottom: 20px;">
+            <label style="display: block; margin-bottom: 10px; font-weight: bold;">Tipe User</label>
+            <div style="margin-bottom: 8px;">
+                <input type="radio" id="semuaTipePeriode" name="incomePeriodeTipeUser" value="SEMUA TIPE" checked style="margin-right: 8px;">
+                <label for="semuaTipePeriode" style="font-weight: normal;">SEMUA TIPE</label>
+            </div>
+            <div style="margin-bottom: 8px;">
+                <input type="radio" id="customerPeriode" name="incomePeriodeTipeUser" value="CUSTOMER" style="margin-right: 8px;">
+                <label for="customerPeriode" style="font-weight: normal;">CUSTOMER</label>
+            </div>
+            <div style="margin-bottom: 8px;">
+                <input type="radio" id="voucherPeriode" name="incomePeriodeTipeUser" value="VOUCHER" style="margin-right: 8px;">
+                <label for="voucherPeriode" style="font-weight: normal;">VOUCHER</label>
+            </div>
+        </div>
+        
+        <div style="margin-bottom: 20px;">
+            <label style="display: block; margin-bottom: 5px; font-weight: bold;">Tipe Service</label>
+            <select id="incomePeriodeTipeService" style="width: 100%; padding: 8px; border: 1px solid #ddd; border-radius: 4px;">
+                <option value="">- Semua Transaksi -</option>
+                <option value="hotspot">Hotspot</option>
+                <option value="ppp">PPP</option>
+            </select>
+        </div>
+        
+        <div style="margin-bottom: 20px;">
+            <label style="display: block; margin-bottom: 5px; font-weight: bold;">Owner Data</label>
+            <select id="incomePeriodeOwnerData" style="width: 100%; padding: 8px; border: 1px solid #ddd; border-radius: 4px;">
+                <option value="">- Semua Owner -</option>
+                <option value="root">root</option>
+                <option value="user">user</option>
+            </select>
+        </div>
+        
+        <div style="margin-bottom: 20px;">
+            <label style="display: block; margin-bottom: 5px; font-weight: bold;">Metode Pembayaran</label>
+            <select id="incomePeriodeMetodePembayaran" style="width: 100%; padding: 8px; border: 1px solid #ddd; border-radius: 4px;">
+                <option value="">- Semua Metode Pembayaran -</option>
+                <option value="cash">Cash</option>
+                <option value="transfer">Transfer</option>
+                <option value="credit_card">Credit Card</option>
+                <option value="e_wallet">E-Wallet</option>
+            </select>
+        </div>
+        
+        <button onclick="submitIncomePeriodeForm()" style="background: #007bff; color: white; border: none; padding: 10px 20px; border-radius: 4px; cursor: pointer; width: 100%;">
+            Lihat Laporan
+        </button>
+    </div>
+</div>
+
 <script>
 // Close modal when clicking outside
 document.addEventListener('click', function(event) {
     var semuaModal = document.getElementById('semuaTagihanModal');
     var periodeModal = document.getElementById('tagihanPeriodeModal');
+    var topupModal = document.getElementById('topupResellerModal');
+    var incomeHarianModal = document.getElementById('incomeHarianModal');
+    var incomePeriodeModal = document.getElementById('incomePeriodeModal');
     
     if (event.target == semuaModal) {
         semuaModal.style.display = 'none';
     }
     if (event.target == periodeModal) {
         periodeModal.style.display = 'none';
+    }
+    if (event.target == topupModal) {
+        topupModal.style.display = 'none';
+    }
+    if (event.target == incomeHarianModal) {
+        incomeHarianModal.style.display = 'none';
+    }
+    if (event.target == incomePeriodeModal) {
+        incomePeriodeModal.style.display = 'none';
     }
 });
 </script>
