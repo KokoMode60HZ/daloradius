@@ -3,7 +3,7 @@
     $operator = $_SESSION['operator_user'];
 
     include_once('library/config_read.php');
-    $log = "visited page: all tickets";
+    $log = "visited page: active tickets";
     include('include/config/logging.php');
 ?>
 <?php include 'includes/header.php'; ?>
@@ -19,7 +19,7 @@
                 </div>
                 <div style="position:relative;">
                     <button id="btn-menu-tiket" style="display:inline-flex;align-items:center;gap:8px;background:#28a745;color:#fff;padding:10px 16px;border-radius:6px;border:none;cursor:pointer;">
-                        <i class="fas fa-bars"></i> MANAJEMEN TIKET <i class="fas fa-caret-down"></i>
+                        <i class="fas fa-bars"></i> DAFTAR TIKET AKTIF <i class="fas fa-caret-down"></i>
                     </button>
                     <div id="menu-tiket" style="display:none;position:absolute;right:0;top:44px;background:#fff;border:1px solid #e0e0e0;border-radius:6px;min-width:240px;box-shadow:0 4px 16px rgba(0,0,0,0.08);overflow:hidden;z-index:10;">
                         <a href="javascript:void(0);" id="open-buat-tiket" style="display:flex;gap:10px;align-items:center;padding:10px 12px;color:#333;text-decoration:none;">
@@ -93,7 +93,7 @@
     
 </div>
 
-<!-- Modals -->
+<!-- Modals (same as semua-tiket) -->
 <div id="modal-buat-tiket" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.5);z-index:1000;">
     <div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);background:#fff;border-radius:8px;min-width:520px;padding:18px;">
         <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;">
@@ -134,8 +134,6 @@
             </div>
         </div>
     </div>
-    
-    
 </div>
 
 <div id="modal-tutup" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.5);z-index:1000;">
@@ -150,7 +148,6 @@
             <a href="javascript:void(0);" data-close="modal-tutup" style="margin-left:8px;">Batal</a>
         </div>
     </div>
-    
 </div>
 
 <div id="modal-hapus" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.5);z-index:1000;">
@@ -165,11 +162,9 @@
             <a href="javascript:void(0);" data-close="modal-hapus" style="margin-left:8px;">Batal</a>
         </div>
     </div>
-    
 </div>
 
 <script>
-// Toggle dropdown menu
 var btnMenu = document.getElementById('btn-menu-tiket');
 if (btnMenu) {
     btnMenu.addEventListener('click', function() {
@@ -178,8 +173,6 @@ if (btnMenu) {
         m.style.display = (m.style.display === 'none' || m.style.display === '') ? 'block' : 'none';
     });
 }
-
-// Open modals
 var openBuat = document.getElementById('open-buat-tiket');
 if (openBuat) openBuat.addEventListener('click', function(){
     document.getElementById('modal-buat-tiket').style.display = 'block';
@@ -195,8 +188,6 @@ if (openHapus) openHapus.addEventListener('click', function(){
     document.getElementById('modal-hapus').style.display = 'block';
     document.getElementById('menu-tiket').style.display = 'none';
 });
-
-// Close modals
 var closeButtons = document.querySelectorAll('[data-close]');
 if (closeButtons) closeButtons.forEach(function(btn){
     btn.addEventListener('click', function(){
@@ -205,8 +196,6 @@ if (closeButtons) closeButtons.forEach(function(btn){
         if (el) el.style.display = 'none';
     });
 });
-
-// Close dropdown when clicking outside
 document.addEventListener('click', function(e){
     var menu = document.getElementById('menu-tiket');
     var btn = document.getElementById('btn-menu-tiket');

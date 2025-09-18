@@ -1,5 +1,6 @@
 <?php
 $operator = isset($_SESSION['operator_user']) ? $_SESSION['operator_user'] : '';
+$initial = strtoupper(substr(trim($operator !== '' ? $operator : 'A'), 0, 1));
 ?>
 <div id="topbar" style="position:fixed;top:0;left:0;right:0;height:48px;background:rgba(21,88,176,0.98);border-bottom:2px solid rgba(255,255,255,0.18);display:flex;justify-content:space-between;align-items:center;z-index:101;">
     <div style="display:flex;align-items:center;padding-left:24px;">
@@ -16,13 +17,17 @@ $operator = isset($_SESSION['operator_user']) ? $_SESSION['operator_user'] : '';
         </button>
         <div class="profile-dropdown" style="position:relative;">
             <button onclick="toggleProfileMenu()" style="background:none;border:none;display:flex;align-items:center;gap:8px;color:#fff;cursor:pointer;padding:4px;">
-                <img src="images/default-avatar.png" alt="Profile" style="width:32px;height:32px;border-radius:50%;">
+                <span style="width:32px;height:32px;border-radius:50%;background:#6c5ce7;color:#fff;display:inline-flex;align-items:center;justify-content:center;font-weight:bold;">
+                    <?php echo $initial; ?>
+                </span>
                 <span><?php echo $operator; ?></span>
                 <i class="fas fa-chevron-down"></i>
             </button>
             <div id="profileDropdown" style="display:none;position:absolute;top:100%;right:0;background:#fff;border-radius:8px;box-shadow:0 2px 10px rgba(0,0,0,0.1);min-width:200px;margin-top:8px;">
                 <div style="padding:16px;text-align:center;border-bottom:1px solid #eee;">
-                    <img src="images/default-avatar.png" alt="Profile" style="width:64px;height:64px;border-radius:50%;margin-bottom:8px;">
+                    <span style="width:64px;height:64px;border-radius:50%;background:#6c5ce7;color:#fff;display:inline-flex;align-items:center;justify-content:center;font-weight:bold;font-size:24px;margin-bottom:8px;">
+                        <?php echo $initial; ?>
+                    </span>
                     <div style="font-weight:bold;"><?php echo $operator; ?></div>
                     <div style="color:#666;font-size:0.9em;">Administrator</div>
                 </div>

@@ -41,19 +41,19 @@
         <div style="display:flex;flex-direction:column;gap:12px;margin-top:24px;">
             <div style="display:flex;align-items:center;">
                 <span style="background:#bdbdbd;color:#333;padding:8px 18px;border-radius:8px 0 0 8px;font-weight:bold;">&#128336; UPTIME</span>
-                <span style="background:#eee;color:#333;padding:8px 18px;border-radius:0 8px 8px 0;font-weight:bold;">503 DAY 11 HOUR 7 MIN</span>
+                <span style="background:#eee;color:#333;padding:8px 18px;border-radius:0 8px 8px 0;font-weight:bold;">0 DAY 0 HOUR 0 MIN</span>
             </div>
             <div style="display:flex;align-items:center;">
                 <span style="background:#bdbdbd;color:#333;padding:8px 18px;border-radius:8px 0 0 8px;font-weight:bold;"><i class="fas fa-memory"></i> RAM</span>
-                <span style="background:#eee;color:#333;padding:8px 18px;border-radius:0 8px 8px 0;font-weight:bold;">32668 MB TOTAL</span>
+                <span style="background:#eee;color:#333;padding:8px 18px;border-radius:0 8px 8px 0;font-weight:bold;">0 MB TOTAL</span>
             </div>
             <div style="display:flex;align-items:center;">
                 <span style="background:#bdbdbd;color:#333;padding:8px 18px;border-radius:8px 0 0 8px;font-weight:bold;"><i class="fas fa-memory"></i> FREE RAM</span>
-                <span style="background:#eee;color:#333;padding:8px 18px;border-radius:0 8px 8px 0;font-weight:bold;">3867 MB FREE</span>
+                <span style="background:#eee;color:#333;padding:8px 18px;border-radius:0 8px 8px 0;font-weight:bold;">0 MB FREE</span>
             </div>
             <div style="display:flex;align-items:center;">
                 <span style="background:#bdbdbd;color:#333;padding:8px 18px;border-radius:8px 0 0 8px;font-weight:bold;"><i class="fas fa-hdd"></i> HDD/SSD</span>
-                <span style="background:#eee;color:#333;padding:8px 18px;border-radius:0 8px 8px 0;font-weight:bold;">106.6 GB FREE</span>
+                <span style="background:#eee;color:#333;padding:8px 18px;border-radius:0 8px 8px 0;font-weight:bold;">0 GB FREE</span>
             </div>
         </div>
     </div>

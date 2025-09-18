@@ -57,10 +57,12 @@
   <div class="dashboard-content" style="display:flex;gap:32px;">
     <div class="dashboard-main" style="flex:1;">
       <div class="dashboard-tabs" style="margin-bottom:18px;">
-        <button class="tab active" style="padding:8px 24px;border-radius:8px;background:#009688;color:#fff;border:none;" onclick="window.location.href='index.php'">Ringkasan</button>
-        <button class="tab" style="padding:8px 24px;border-radius:8px;background:#eee;color:#333;border:none;" onclick="window.location.href='aktivitas.php'">Aktivitas</button>
-        <button class="tab" style="padding:8px 24px;border-radius:8px;background:#eee;color:#333;border:none;" onclick="window.location.href='trafik.php'">Trafik</button>
+        <button id="main-tab-ringkasan" class="tab active" style="padding:8px 24px;border-radius:8px;background:#009688;color:#fff;border:none;">Ringkasan</button>
+        <button id="main-tab-aktivitas" class="tab" style="padding:8px 24px;border-radius:8px;background:#eee;color:#333;border:none;">Aktivitas</button>
+        <button id="main-tab-trafik" class="tab" style="padding:8px 24px;border-radius:8px;background:#eee;color:#333;border:none;">Trafik</button>
       </div>
+      <!-- Ringkasan Section (default) -->
+      <div id="ringkasan-section" style="display:block;">
       <div class="dashboard-cards-grid" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:18px;margin-bottom:32px;">
         <div class="dashboard-card" style="background:#fff;border-radius:12px;padding:18px;text-align:center;box-shadow:0 2px 8px rgba(0,0,0,0.07);">
           <i class="fas fa-signal" style="font-size:2em;color:#009688;"></i>
@@ -114,11 +116,12 @@
       </div>
       <div class="dashboard-table-section" style="margin-bottom:32px;">
         <div class="table-tabs" style="margin-bottom:12px;">
-          <button class="tab active" style="padding:8px 24px;border-radius:8px;background:#009688;color:#fff;border:none;">Invoice Harian</button>
-          <button class="tab" style="padding:8px 24px;border-radius:8px;background:#eee;color:#333;border:none;">Invoice</button>
-          <button class="tab" style="padding:8px 24px;border-radius:8px;background:#eee;color:#333;border:none;">Router</button>
+          <button id="tab-income" class="tab active" style="padding:8px 24px;border-radius:8px;background:#009688;color:#fff;border:none;">Income Harian</button>
+          <button id="tab-invoice" class="tab" style="padding:8px 24px;border-radius:8px;background:#eee;color:#333;border:none;">Invoice</button>
+          <button id="tab-router" class="tab" style="padding:8px 24px;border-radius:8px;background:#eee;color:#333;border:none;">Router</button>
         </div>
-        <div class="table-responsive">
+        <!-- Income Harian Section -->
+        <div id="income-section" class="table-responsive" style="display:block;">
           <table class="styled-table" style="width:100%;border-collapse:collapse;">
             <thead>
               <tr style="background:#009688;color:#fff;">
@@ -161,6 +164,115 @@
               <?php endif; ?>
             </tbody>
           </table>
+        </div>
+
+        <!-- Invoice Section -->
+        <div id="invoice-section" class="table-responsive" style="display:none;">
+          <table class="styled-table" style="width:100%;border-collapse:collapse;">
+            <thead>
+              <tr style="background:#009688;color:#fff;">
+                <th>Invoice</th>
+                <th>ID Pelanggan</th>
+                <th>Nama Lengkap</th>
+                <th>Tipe Service</th>
+                <th>Paket Langganan</th>
+                <th>Jumlah Tagihan</th>
+                <th>Jatuh Tempo</th>
+                <th>Owner Data</th>
+                <th>Aksi</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td colspan="9" style="text-align:center;">Tidak ada data invoice</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Router Section -->
+        <div id="router-section" class="table-responsive" style="display:none;">
+          <div style="margin-bottom:8px;color:#555;">
+            <div>Note :</div>
+            <ul style="margin:6px 0 0 18px;">
+              <li>Sistem akan mengecek status ping ke router setiap 5 menit</li>
+              <li>Tabel Router akan di refresh otomatis setiap 1 menit</li>
+            </ul>
+          </div>
+          <table class="styled-table" style="width:100%;border-collapse:collapse;">
+            <thead>
+              <tr style="background:#009688;color:#fff;">
+                <th>API</th>
+                <th>Status Ping</th>
+                <th>Nama Router</th>
+                <th>IP Address</th>
+                <th>Cek Status Terakhir</th>
+                <th>Deskripsi</th>
+                <th>User Online</th>
+              </tr>
+            </thead>
+            <tbody>
+              <?php
+                $routerName = 'Router-01';
+                $routerIp = '192.168.1.1';
+                $lastCheck = date('M/d/Y H:i:s');
+                $desc = isset($systemInfo['board-name']) ? $systemInfo['board-name'] : 'Router';
+                $userOnline = count($activeUsers);
+              ?>
+              <tr>
+                <td><span style="display:inline-block;width:22px;height:22px;background:#e9ecef;border-radius:4px;text-align:center;line-height:22px;">⚙</span></td>
+                <td><span style="background:#28a745;color:#fff;padding:2px 8px;border-radius:12px;font-size:0.85em;">online</span></td>
+                <td><?php echo htmlspecialchars($routerName); ?></td>
+                <td><?php echo htmlspecialchars($routerIp); ?></td>
+                <td><?php echo htmlspecialchars($lastCheck); ?></td>
+                <td><?php echo htmlspecialchars($desc); ?></td>
+                <td><?php echo $userOnline > 0 ? '<span style="display:inline-flex;align-items:center;gap:6px;"><i class="fas fa-chart-bar"></i> active ' . $userOnline . '</span>' : '-'; ?></td>
+              </tr>
+            </tbody>
+          </table>
+
+          <!-- Log Panel -->
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-top:16px;margin-bottom:8px;">
+            <div style="font-weight:bold;color:#333;">Log Aktivitas Router</div>
+            <div style="display:flex;gap:8px;">
+              <button id="btn-clear-logs" style="background:#17a2b8;color:#fff;border:none;padding:6px 10px;border-radius:4px;">Bersihkan</button>
+              <button id="btn-log-user" style="background:#6c757d;color:#fff;border:none;padding:6px 10px;border-radius:4px;">Log User</button>
+            </div>
+          </div>
+          <div id="router-logs" style="background:#fff;border:1px solid #e0e0e0;border-radius:6px;padding:12px;height:180px;overflow:auto;color:#555;">
+            <div>[<?php echo date('H:i:s'); ?>] Sistem siap. Menunggu aktivitas...</div>
+          </div>
+        </div>
+      </div>
+      </div>
+
+      <!-- Aktivitas Section -->
+      <div id="aktivitas-section" style="display:none;">
+        <div class="dashboard-card" style="background:#fff;border-radius:12px;padding:0;box-shadow:0 2px 8px rgba(0,0,0,0.07);">
+          <div style="padding:12px 16px;border-bottom:1px solid #eee;font-weight:bold;">Aktivitas</div>
+          <div style="max-height:480px;overflow:auto;padding:12px 16px;">
+            <div style="color:#666;text-align:center;">Belum ada aktivitas</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Trafik Section -->
+      <div id="trafik-section" style="display:none;">
+        <div class="dashboard-card" style="background:#fff;border-radius:12px;padding:16px;box-shadow:0 2px 8px rgba(0,0,0,0.07);">
+          <div style="display:flex;gap:12px;flex-wrap:wrap;margin-bottom:12px;">
+            <select style="flex:1;min-width:260px;padding:8px;border:1px solid #ddd;border-radius:6px;">
+              <option>- Pilih Mikrotik (NAS) -</option>
+            </select>
+            <select style="flex:1;min-width:260px;padding:8px;border:1px solid #ddd;border-radius:6px;">
+              <option>Pilih Interface Mikrotik</option>
+            </select>
+          </div>
+          <div style="text-align:center;color:#00796b;margin:24px 0;">Silahkan pilih NAS dan Interface</div>
+          <div style="height:240px;border-bottom:1px solid #eee;margin-bottom:12px;"></div>
+          <div style="display:flex;justify-content:center;gap:18px;color:#444;">
+            <span><span style="display:inline-block;width:10px;height:10px;background:#00c853;border-radius:50%;margin-right:6px;"></span>TX</span>
+            <span><span style="display:inline-block;width:10px;height:10px;background:#5e35b1;border-radius:50%;margin-right:6px;"></span>RX</span>
+          </div>
         </div>
       </div>
     </div>
@@ -257,6 +369,115 @@ function updateTime() {
 setInterval(updateTime, 1000);
 // Jalankan sekali saat halaman dimuat
 updateTime();
+// Tab switching for Income / Invoice / Router
+const incomeBtn = document.getElementById('tab-income');
+const invoiceBtn = document.getElementById('tab-invoice');
+const routerBtn = document.getElementById('tab-router');
+const incomeSection = document.getElementById('income-section');
+const invoiceSection = document.getElementById('invoice-section');
+const routerSection = document.getElementById('router-section');
+
+function setActive(btn) {
+    [incomeBtn, invoiceBtn, routerBtn].forEach(b => {
+        if (!b) return;
+        if (b === btn) {
+            b.classList.add('active');
+            b.style.background = '#009688';
+            b.style.color = '#fff';
+        } else {
+            b.classList.remove('active');
+            b.style.background = '#eee';
+            b.style.color = '#333';
+        }
+    });
+}
+
+function showSection(section) {
+    if (incomeSection) incomeSection.style.display = section === 'income' ? 'block' : 'none';
+    if (invoiceSection) invoiceSection.style.display = section === 'invoice' ? 'block' : 'none';
+    if (routerSection) routerSection.style.display = section === 'router' ? 'block' : 'none';
+}
+
+if (incomeBtn) incomeBtn.addEventListener('click', function() {
+    setActive(incomeBtn);
+    showSection('income');
+});
+if (invoiceBtn) invoiceBtn.addEventListener('click', function() {
+    setActive(invoiceBtn);
+    showSection('invoice');
+});
+if (routerBtn) routerBtn.addEventListener('click', function() {
+    setActive(routerBtn);
+    showSection('router');
+});
+
+// Main tabs switching: Ringkasan / Aktivitas / Trafik
+const tabRingkasan = document.getElementById('main-tab-ringkasan');
+const tabAktivitas = document.getElementById('main-tab-aktivitas');
+const tabTrafik = document.getElementById('main-tab-trafik');
+const ringkasanSection = document.getElementById('ringkasan-section');
+const aktivitasSection = document.getElementById('aktivitas-section');
+const trafikSection = document.getElementById('trafik-section');
+
+function setMainActive(activeBtn) {
+  [tabRingkasan, tabAktivitas, tabTrafik].forEach(function(b){
+    if (!b) return;
+    if (b === activeBtn) {
+      b.classList.add('active');
+      b.style.background = '#009688';
+      b.style.color = '#fff';
+    } else {
+      b.classList.remove('active');
+      b.style.background = '#eee';
+      b.style.color = '#333';
+    }
+  });
+}
+
+function showMain(section) {
+  if (ringkasanSection) ringkasanSection.style.display = section === 'ringkasan' ? 'block' : 'none';
+  if (aktivitasSection) aktivitasSection.style.display = section === 'aktivitas' ? 'block' : 'none';
+  if (trafikSection) trafikSection.style.display = section === 'trafik' ? 'block' : 'none';
+}
+
+if (tabRingkasan) tabRingkasan.addEventListener('click', function(){
+  setMainActive(tabRingkasan);
+  showMain('ringkasan');
+});
+if (tabAktivitas) tabAktivitas.addEventListener('click', function(){
+  setMainActive(tabAktivitas);
+  showMain('aktivitas');
+});
+if (tabTrafik) tabTrafik.addEventListener('click', function(){
+  setMainActive(tabTrafik);
+  showMain('trafik');
+});
+
+// Router logs handlers
+const clearBtn = document.getElementById('btn-clear-logs');
+const logUserBtn = document.getElementById('btn-log-user');
+const logsBox = document.getElementById('router-logs');
+
+function appendLog(text) {
+    if (!logsBox) return;
+    const line = document.createElement('div');
+    const ts = new Date().toLocaleTimeString('id-ID', { hour12: false });
+    line.textContent = `[${ts}] ${text}`;
+    logsBox.appendChild(line);
+    logsBox.scrollTop = logsBox.scrollHeight;
+}
+
+if (clearBtn) clearBtn.addEventListener('click', function() {
+    const ok = confirm('Anda yakin ingin menghapus semua log? Tindakan ini tidak dapat dibatalkan.');
+    if (ok && logsBox) {
+        logsBox.innerHTML = '';
+        appendLog('Log dibersihkan.');
+    }
+});
+
+if (logUserBtn) logUserBtn.addEventListener('click', function() {
+    appendLog('Menampilkan Log User (placeholder). Integrasikan ke sumber log Anda.');
+});
 </script>
 </body>
 </html>
